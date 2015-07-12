@@ -1,0 +1,9 @@
+D:\C#\projects\BurgerShop\Shop.Data\bin\Debug\Shop.Data.dll.config
+D:\C#\projects\BurgerShop\Shop.Data\bin\Debug\Shop.Data.dll
+D:\C#\projects\BurgerShop\Shop.Data\bin\Debug\Shop.Data.pdb
+D:\C#\projects\BurgerShop\Shop.Data\bin\Debug\EntityFramework.dll
+D:\C#\projects\BurgerShop\Shop.Data\bin\Debug\EntityFramework.SqlServer.dll
+D:\C#\projects\BurgerShop\Shop.Data\bin\Debug\EntityFramework.xml
+D:\C#\projects\BurgerShop\Shop.Data\bin\Debug\EntityFramework.SqlServer.xml
+D:\C#\projects\BurgerShop\Shop.Data\obj\Debug\Shop.Data.dll
+D:\C#\projects\BurgerShop\Shop.Data\obj\Debug\Shop.Data.pdb
