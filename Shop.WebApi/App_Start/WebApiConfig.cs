@@ -11,8 +11,14 @@ namespace Shop.WebApi
         {
             config.Routes.MapHttpRoute(
                 name: "Products",
-                routeTemplate: "api/products/{productID}",
+                routeTemplate: "products/{productID}",
                 defaults: new { controller = "products", productID = RouteParameter.Optional }
+            );
+
+            config.Routes.MapHttpRoute(
+                name: "Orders",
+                routeTemplate: "orders/{orderID}",
+                defaults: new { controller = "orders", orderID = RouteParameter.Optional }
             );
 
             // Uncomment the following line of code to enable query support for actions with an IQueryable or IQueryable<T> return type.

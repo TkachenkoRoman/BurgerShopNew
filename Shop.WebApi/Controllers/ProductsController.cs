@@ -72,5 +72,65 @@ namespace Shop.WebApi.Controllers
             }
         }
 
+        [HttpPut]
+        [HttpPatch]
+        public HttpResponseMessage Put(int productID, [FromBody] ProductModel productModel)
+        {
+            try
+            {
+                var updatedProduct = TheModelFactory.Parse(productModel);
+                if (updatedProduct == null) Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Error in parsing product");
+
+                var originalProduct = TheRepository.GetProduct(productID);
+                if (originalProduct == null || originalProduct.Id != productID)
+                {
+                    return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Product not found");
+                }
+                else
+                {
+                    updatedProduct.Id = originalProduct.Id;
+                }
+
+                if (TheRepository.Update(originalProduct, updatedProduct) && TheRepository.SaveAll())
+                {
+                    return Request.CreateResponse(HttpStatusCode.OK, TheModelFactory.Create(updatedProduct));
+                }
+                else
+                {
+                    return Request.CreateResponse(HttpStatusCode.NotModified);
+                }
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex);
+            }
+        }
+
+        public HttpResponseMessage Delete(int productID)
+        {
+            try 
+	        {	        
+		        var product = TheRepository.GetProduct(productID);
+                if (product == null)
+                {
+                    return Request.CreateResponse(HttpStatusCode.NotFound);
+                }
+
+                if (TheRepository.DeleteProduct(productID) && TheRepository.SaveAll())
+                {
+                    return Request.CreateResponse(HttpStatusCode.OK);
+                }
+                else
+                {
+                    return Request.CreateResponse(HttpStatusCode.BadRequest);
+                }
+
+	        }
+	        catch (Exception ex)
+	        {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex.Message);
+	        }
+        }
+
     }
 }

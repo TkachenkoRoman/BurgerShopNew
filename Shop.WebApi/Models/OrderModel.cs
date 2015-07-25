@@ -11,9 +11,9 @@ namespace Shop.WebApi.Models
         public int CustomerID { get; set; }
         public DateTime OrderDate { get; set; }
         public string ShipAddress { get; set; }
-        public DateTime ShippedDate { get; set; }
+        public Nullable<System.DateTime> ShippedDate { get; set; }
         public string DeliveryMan { get; set; }
         public string Status { get; set; }
-        public double TotalPrice { get; set; }
+        public Nullable<double> TotalPrice { get; set; }
     }
 }

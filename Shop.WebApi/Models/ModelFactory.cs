@@ -36,10 +36,10 @@ namespace Shop.WebApi.Models
                 CustomerID = order.CustomerID,
                 OrderDate = order.OrderDate,
                 ShipAddress = order.ShipAddress,
-                ShippedDate = (DateTime)order.ShippedDate,
+                ShippedDate = order.ShippedDate,
                 DeliveryMan = order.DeliveryMan,
                 Status = order.Status,
-                TotalPrice = (double)order.TotalPrice
+                TotalPrice = order.TotalPrice
             };
         }
 

@@ -1,0 +1,25 @@
+﻿<div class="row">
+    <div class="col-md-3">
+        <div class="list-group">
+            <a href="#food" class="list-group-item" ng-click="productsCtrl.selectTab(1)">Burgers</a>
+            <a href="#food" class="list-group-item" ng-click="productsCtrl.selectTab(2)">Drinks</a>
+        </div>
+    </div>
+
+    <div class="col-md-9">
+        <div class="row" ng-repeat="row in productsCtrl.chunkedProducts">
+            <div class="col-ld-4 col-md-4 col-sm-4" ng-repeat="product in row ">
+                <div class="thumbnail">
+                    <img ng-src="{{product.PicturePath || 'http://placehold.it/300x270'}}" alt="image">
+                    <div class="caption">
+                        <h4 class="pull-right">{{ product.Price | currency }}</h4>
+                        <h4>
+                            <a ng-href="#food/{{product.Id}}">{{ product.Name | cut:true:50:'...'}}</a>
+                        </h4>
+                        <!-- <p>{{ product.Description | cut:true:100:'...'}}</p> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

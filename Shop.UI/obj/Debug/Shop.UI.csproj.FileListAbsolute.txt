@@ -1,0 +1,6 @@
+D:\C#\projects\BurgerShop\Shop.UI\bin\Shop.UI.dll.config
+D:\C#\projects\BurgerShop\Shop.UI\bin\Shop.UI.dll
+D:\C#\projects\BurgerShop\Shop.UI\bin\Shop.UI.pdb
+D:\C#\projects\BurgerShop\Shop.UI\obj\Debug\Shop.UI.csprojResolveAssemblyReference.cache
+D:\C#\projects\BurgerShop\Shop.UI\obj\Debug\Shop.UI.dll
+D:\C#\projects\BurgerShop\Shop.UI\obj\Debug\Shop.UI.pdb

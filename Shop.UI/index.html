@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="burgerShop">
+<head>
+    <link href="../Content/bootstrap.css" rel="stylesheet" />
+    <script src="../scripts/angular.js"></script>
+    <script src="../scripts/angular-route.js"></script>
+    <script src="../scripts/angularApp/routes.js"></script>
+    <script src="../scripts/angularApp/controllers/productsController.js"></script>
+    <script src="scripts/angularApp/controllers/productDetailsController.js"></script>
+    <script src="../scripts/angularApp/filters/allFilters.js"></script>
+    <title></title>
+</head>
+<body>
+    <nav class="navbar navbar-default">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#food/">Burger Shop</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="#">About</a>
+                </li>
+                <li>
+                    <a href="#">Contacts</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div ng-view></div>
+    </div>
+</body>
+</html>
