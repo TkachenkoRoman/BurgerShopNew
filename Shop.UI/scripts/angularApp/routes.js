@@ -5,11 +5,6 @@
         controller: 'productsController',
         controllerAs: 'productsCtrl'
     })
-    .when('/food/:id', {
-        templateUrl: '../templates/productDetails.html',
-        controller: 'productDetailsController',
-        controllerAs: 'productDetailsCtrl'
-    })
     .when('/', {
         redirectTo: '/food'
     });

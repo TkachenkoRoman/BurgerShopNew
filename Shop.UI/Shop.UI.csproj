@@ -61,6 +61,8 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="css\popup.css" />
+    <Content Include="css\style.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Icon.png" />
     <Content Include="scripts\angular-animate.js" />
@@ -88,8 +90,10 @@
     <Content Include="scripts\angular-touch.min.js" />
     <Content Include="scripts\angular.js" />
     <Content Include="scripts\angular.min.js" />
-    <Content Include="scripts\angularApp\controllers\productDetailsController.js" />
     <Content Include="scripts\angularApp\controllers\productsController.js" />
+    <Content Include="scripts\angularApp\directives\backImgDirective.js" />
+    <Content Include="scripts\angularApp\directives\equalHeightOfElementsDirective.js" />
+    <Content Include="scripts\angularApp\directives\showOnHoverParentDirective.js" />
     <Content Include="scripts\angularApp\filters\allFilters.js" />
     <Content Include="scripts\angularApp\routes.js" />
     <Content Include="scripts\bootstrap.js" />
@@ -844,6 +848,7 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
     <None Include="scripts\jquery-1.9.1.intellisense.js" />
+    <Content Include="scripts\jquery-1.11.3.js" />
     <Content Include="scripts\jquery-1.9.1.js" />
     <Content Include="scripts\jquery-1.9.1.min.js" />
     <Content Include="scripts\npm.js" />
@@ -879,7 +884,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="css\" />
     <Folder Include="img\" />
   </ItemGroup>
   <PropertyGroup>

@@ -1,13 +1,20 @@
 ﻿<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" ng-app="burgerShop">
 <head>
+    <script src="scripts/jquery-1.11.3.js"></script>
     <link href="../Content/bootstrap.css" rel="stylesheet" />
+    <link href="css/popup.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet" />
+    <link href='http://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'> <!-- nice font for detail -->
+    <link href='http://fonts.googleapis.com/css?family=Bitter' rel='stylesheet' type='text/css'> <!-- nice font for detail Name of product -->
+
     <script src="../scripts/angular.js"></script>
     <script src="../scripts/angular-route.js"></script>
     <script src="../scripts/angularApp/routes.js"></script>
     <script src="../scripts/angularApp/controllers/productsController.js"></script>
-    <script src="scripts/angularApp/controllers/productDetailsController.js"></script>
+    <script src="../scripts/angularApp/controllers/productDetailsController.js"></script>
     <script src="../scripts/angularApp/filters/allFilters.js"></script>
+    <script src="../scripts/angularApp/directives/showOnHoverParentDirective.js"></script>
     <title></title>
 </head>
 <body>
@@ -27,7 +34,7 @@
         </div>
     </nav>
 
-    <div class="container">
+    <div id="mainContainer" class="container">
         <div ng-view></div>
     </div>
 </body>

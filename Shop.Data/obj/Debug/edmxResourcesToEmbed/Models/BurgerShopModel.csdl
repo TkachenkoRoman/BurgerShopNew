@@ -46,6 +46,7 @@
     <Property Name="CategoryID" Type="Byte" Nullable="false" />
     <NavigationProperty Name="Categories" Relationship="Self.FK_Products_Products" FromRole="Products" ToRole="Categories" />
     <NavigationProperty Name="OrderDetails" Relationship="Self.FK_OrderDetails_Products" FromRole="Products" ToRole="OrderDetails" />
+    <Property Name="PictureDetailPath" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="OrderDetails">
     <Key>

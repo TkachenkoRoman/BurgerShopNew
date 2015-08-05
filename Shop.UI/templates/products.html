@@ -1,4 +1,25 @@
-﻿<div class="row">
+﻿<div class="modal-bg">
+    <div id="modal" class="panel panel-default detail-panel">
+        <div class="panel-heading detail-header">{{ productsCtrl.product.Name }}<a class="glyphicon glyphicon-remove" id="close"></a></div>
+        <div class="panel-body">
+            <div class="col-sm-6 col-md-6">
+                <img class="img-responsive" ng-src="{{ productsCtrl.product.PictureDetailPath || 'http://placehold.it/500x540'}}">
+            </div>
+            <div class="col-sm-6 col-md-6">
+                <div class="row detail" ng-if="productsCtrl.product.Description">
+                    <p>{{ productsCtrl.product.Description }}</p>
+                </div>
+                <div class="row detail-price detail">
+                    <p>Price: {{productsCtrl.product.Price | currency}}</p>
+                </div>
+            </div>
+            <button type="button" class="btn btn-lg btn-default detail-add-btn">Add to cart</button>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
     <div class="col-md-3">
         <div class="list-group">
             <a href="#food" class="list-group-item" ng-click="productsCtrl.selectTab(1)">Burgers</a>
@@ -10,11 +31,16 @@
         <div class="row" ng-repeat="row in productsCtrl.chunkedProducts">
             <div class="col-ld-4 col-md-4 col-sm-4" ng-repeat="product in row ">
                 <div class="thumbnail">
-                    <img ng-src="{{product.PicturePath || 'http://placehold.it/300x270'}}" alt="image">
+                    <div class="product-img" id="product{{product.Id}}">
+                        <a href="" ng-click="productsCtrl.showProductDetails(product.Id)">
+                            <img ng-src="{{product.PicturePath || 'http://placehold.it/300x270'}}" alt="image">
+                        </a>
+                        <span class="glyphicon glyphicon-plus button-add-to-cart" show-on-hover-parent></span>
+                    </div>
                     <div class="caption">
                         <h4 class="pull-right">{{ product.Price | currency }}</h4>
-                        <h4>
-                            <a ng-href="#food/{{product.Id}}">{{ product.Name | cut:true:50:'...'}}</a>
+                        <h4 title="{{product.Name}}">
+                            <a href="" ng-click="productsCtrl.showProductDetails(product.Id)">{{ product.Name | cut:true:40:'...'}}</a>
                         </h4>
                         <!-- <p>{{ product.Description | cut:true:100:'...'}}</p> -->
                     </div>

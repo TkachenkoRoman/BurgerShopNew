@@ -24,7 +24,8 @@ namespace Shop.WebApi.Models
                 Price = product.Price,
                 Description = product.Description,
                 PicturePath = product.PicturePath,
-                CategoryID = product.CategoryID
+                CategoryID = product.CategoryID,
+                PictureDetailPath = product.PictureDetailPath
             };
         }
 
@@ -86,6 +87,7 @@ namespace Shop.WebApi.Models
                     Description = model.Description,
                     PicturePath = model.PicturePath,
                     CategoryID = model.CategoryID,
+                    PictureDetailPath = model.PictureDetailPath,
                     Categories = _repo.GetCategory(model.CategoryID)
                 };
                 return product;

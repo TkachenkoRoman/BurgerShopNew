@@ -1,0 +1,59 @@
+﻿.detail {
+    font-family: 'Pacifico', cursive;
+    font-size: 21px;
+    font-weight: 400;
+    color: #333;
+}
+
+.detail-header {
+    font-family: 'Bitter', serif;
+    font-size: 21px;
+    font-weight: 600;
+    color: #333;
+}
+
+.detail-price {
+    color: #5cb85c;
+    margin-top: 15px;
+}
+
+.detail-panel {
+    display:inline-block;
+    position:relative;
+}
+
+.detail-add-btn {
+    position:absolute;
+    bottom:0;
+    right:0;
+    margin-right: 20px;
+    margin-bottom: 10px;
+}
+
+.thumbnail {
+    min-height: 315px;
+}
+
+.product-img {
+    display:inline-block;
+    position:relative;
+}
+
+.button-add-to-cart {
+    display: none;
+    position:absolute;
+    top:0;
+    right:0;
+    width: 45px;
+    height: 45px;
+    line-height: 45px;
+    text-align: center; 
+    background-color: rgba(128, 128, 128, 0.5);
+    color: #337ab7;
+    font-size: 20px;
+}
+
+.button-add-to-cart:hover {
+    background-color: rgba(128, 128, 128, 0.8);
+    cursor: pointer;
+}

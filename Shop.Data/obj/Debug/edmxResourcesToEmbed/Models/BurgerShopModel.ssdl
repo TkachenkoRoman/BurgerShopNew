@@ -52,6 +52,7 @@ warning 6002: The table/view 'BurgerShopDB.dbo.OrderDetails' does not have a pri
     <Property Name="Description" Type="varchar" MaxLength="400" />
     <Property Name="PicturePath" Type="varchar" MaxLength="200" />
     <Property Name="CategoryID" Type="tinyint" Nullable="false" />
+    <Property Name="PictureDetailPath" Type="varchar" MaxLength="200" />
   </EntityType>
   <Association Name="FK_OrderDetails_Orders">
     <End Role="Orders" Type="Self.Orders" Multiplicity="1">

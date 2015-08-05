@@ -1,6 +1,26 @@
 ﻿angular.module('burgerShop')
     .controller('productsController', ['$http', function ($http) {
-    this.tab = 1; //default
+    if (!this.tab)
+        this.tab = 1; //default
+
+    var shop = this;
+    shop.products = [];
+
+    this.showProductDetails = function (id) {
+        var url = 'http://localhost:8080/api/products/' + id;
+        $http.get(url).success(function (data) {
+            //console.log('success');
+            shop.product = data;
+            $('#modal').css('display', 'block');
+            $('.modal-bg').fadeIn();
+        });
+    };
+    
+    $('#close').click(function () { //close details popup 
+        $('.modal-bg').fadeOut();
+        $('#modal').fadeOut();
+        return false;
+    });
 
     this.selectTab = function (currTab) {
         this.tab = currTab;
@@ -11,9 +31,6 @@
     this.isSelected = function (tab) {
         return this.tab === tab;
     };
-
-    var shop = this;
-    shop.products = [];
 
     $http.get('http://localhost:8080/api/products').success(function (data) {
         //console.log('success');

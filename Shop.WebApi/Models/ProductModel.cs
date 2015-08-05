@@ -13,5 +13,6 @@ namespace Shop.WebApi.Models
         public string Description { get; set; }
         public string PicturePath { get; set; }
         public byte CategoryID { get; set; }
+        public string PictureDetailPath { get; set; }
     }
 }

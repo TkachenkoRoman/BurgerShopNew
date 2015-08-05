@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="BurgerShopDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="BurgerShopDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Categories">
           <Key>
             <PropertyRef Name="Id" />
@@ -57,6 +57,7 @@ warning 6002: The table/view 'BurgerShopDB.dbo.OrderDetails' does not have a pri
           <Property Name="Description" Type="varchar" MaxLength="400" />
           <Property Name="PicturePath" Type="varchar" MaxLength="200" />
           <Property Name="CategoryID" Type="tinyint" Nullable="false" />
+          <Property Name="PictureDetailPath" Type="varchar" MaxLength="200" />
         </EntityType>
         <Association Name="FK_OrderDetails_Orders">
           <End Role="Orders" Type="Self.Orders" Multiplicity="1">
@@ -143,8 +144,7 @@ warning 6002: The table/view 'BurgerShopDB.dbo.OrderDetails' does not have a pri
             <End Role="Products" EntitySet="Products" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="BurgerShopDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -194,6 +194,7 @@ warning 6002: The table/view 'BurgerShopDB.dbo.OrderDetails' does not have a pri
           <Property Name="CategoryID" Type="Byte" Nullable="false" />
           <NavigationProperty Name="Categories" Relationship="Self.FK_Products_Products" FromRole="Products" ToRole="Categories" />
           <NavigationProperty Name="OrderDetails" Relationship="Self.FK_OrderDetails_Products" FromRole="Products" ToRole="OrderDetails" />
+          <Property Name="PictureDetailPath" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="OrderDetails">
           <Key>
@@ -328,6 +329,7 @@ warning 6002: The table/view 'BurgerShopDB.dbo.OrderDetails' does not have a pri
           <EntitySetMapping Name="Products">
             <EntityTypeMapping TypeName="BurgerShopDBModel.Products">
               <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="PictureDetailPath" ColumnName="PictureDetailPath" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Price" ColumnName="Price" />

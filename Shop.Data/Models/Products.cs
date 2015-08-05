@@ -18,13 +18,14 @@ namespace Shop.Data.Models
         {
             this.OrderDetails = new HashSet<OrderDetails>();
         }
-        
+    
         public int Id { get; set; }
         public string Name { get; set; }
         public double Price { get; set; }
         public string Description { get; set; }
         public string PicturePath { get; set; }
         public byte CategoryID { get; set; }
+        public string PictureDetailPath { get; set; }
     
         public virtual Categories Categories { get; set; }
         public virtual ICollection<OrderDetails> OrderDetails { get; set; }

@@ -7,3 +7,28 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+namespace Shop.Data.Models
+{
+    using System;
+    using System.Data.Entity;
+    using System.Data.Entity.Infrastructure;
+
+    public partial class BurgerShopDBEntities : DbContext
+    {
+        public BurgerShopDBEntities()
+            : base("name=BurgerShopDBEntities")
+        {
+        }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            throw new UnintentionalCodeFirstException();
+        }
+
+        public virtual DbSet<Categories> Categories { get; set; }
+        public virtual DbSet<Customers> Customers { get; set; }
+        public virtual DbSet<Orders> Orders { get; set; }
+        public virtual DbSet<Products> Products { get; set; }
+        public virtual DbSet<OrderDetails> OrderDetails { get; set; }
+    }
+}

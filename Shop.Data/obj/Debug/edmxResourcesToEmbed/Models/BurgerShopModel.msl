@@ -37,6 +37,7 @@
     <EntitySetMapping Name="Products">
       <EntityTypeMapping TypeName="BurgerShopDBModel.Products">
         <MappingFragment StoreEntitySet="Products">
+          <ScalarProperty Name="PictureDetailPath" ColumnName="PictureDetailPath" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Price" ColumnName="Price" />

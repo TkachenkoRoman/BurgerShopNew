@@ -13,10 +13,10 @@ namespace Shop.Data.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class BurgerShopDBEntities : DbContext
+    public partial class BurgerShopContext : DbContext
     {
-        public BurgerShopDBEntities()
-            : base("name=BurgerShopDBEntities")
+        public BurgerShopContext()
+            : base("name=BurgerShopContext")
         {
         }
     
