@@ -51,9 +51,21 @@
     background-color: rgba(128, 128, 128, 0.5);
     color: #337ab7;
     font-size: 20px;
+    border-bottom-left-radius: 10px;
 }
 
 .button-add-to-cart:hover {
     background-color: rgba(128, 128, 128, 0.8);
     cursor: pointer;
+}
+
+.shopping-cart-link {
+    margin-right: 10px;
+}
+
+a:disabled {
+    color: #AAAAAA;
+    cursor: default;
+    pointer-events: none;
+    text-decoration: none;
 }

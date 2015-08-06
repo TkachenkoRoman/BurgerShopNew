@@ -90,12 +90,15 @@
     <Content Include="scripts\angular-touch.min.js" />
     <Content Include="scripts\angular.js" />
     <Content Include="scripts\angular.min.js" />
-    <Content Include="scripts\angularApp\controllers\productsController.js" />
+    <Content Include="scripts\angularApp\controllers\storeController.js" />
+    <Content Include="scripts\angularApp\directives\addedProductQuantityControlDirective.js" />
     <Content Include="scripts\angularApp\directives\backImgDirective.js" />
     <Content Include="scripts\angularApp\directives\equalHeightOfElementsDirective.js" />
     <Content Include="scripts\angularApp\directives\showOnHoverParentDirective.js" />
     <Content Include="scripts\angularApp\filters\allFilters.js" />
-    <Content Include="scripts\angularApp\routes.js" />
+    <Content Include="scripts\angularApp\app.js" />
+    <Content Include="scripts\angularApp\shoppingCart.js" />
+    <Content Include="scripts\angularApp\store.js" />
     <Content Include="scripts\bootstrap.js" />
     <Content Include="scripts\bootstrap.min.js" />
     <Content Include="scripts\i18n\angular-locale_aa-dj.js" />
@@ -853,7 +856,7 @@
     <Content Include="scripts\jquery-1.9.1.min.js" />
     <Content Include="scripts\npm.js" />
     <Content Include="index.html" />
-    <Content Include="templates\productDetails.html" />
+    <Content Include="templates\shoppingCart.html" />
     <Content Include="templates\products.html" />
     <Content Include="Web.config" />
     <Content Include="scripts\jquery-1.9.1.min.map" />
