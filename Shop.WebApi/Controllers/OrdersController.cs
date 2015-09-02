@@ -1,6 +1,7 @@
 ﻿using Shop.Data;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -44,5 +45,26 @@ namespace Shop.WebApi.Controllers
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex);
             }
         }
+
+        public HttpResponseMessage Post([FromBody] OrderFormModel orderFormModel)
+        {
+            try
+            {
+                var res = TheModelFactory.Parse(orderFormModel);
+                if (res != null)
+                {
+                    return Request.CreateResponse(HttpStatusCode.Created);
+                }
+                else
+                {
+                    return Request.CreateResponse(HttpStatusCode.Conflict);
+                }
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex);
+            }
+        }
+
     }
 }

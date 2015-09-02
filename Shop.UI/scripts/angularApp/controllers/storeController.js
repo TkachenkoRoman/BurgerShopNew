@@ -1,5 +1,5 @@
 ﻿angular.module('burgerShop')
-    .controller('storeController', ['$http', '$scope', 'StoreService', 'DataService', function ($http, $scope, StoreService, DataService) {
+    .controller('storeController', ['$scope', 'StoreService', 'DataService', function ($scope, StoreService, DataService) {
 
     var store = this;
     if (!store.tab)
@@ -39,6 +39,27 @@
     $scope.isSelected = function (tab) {
         return store.tab === tab;
     };
+
+    $scope.orderFormSubmit = function () {
+        var form = document.orderForm;
+        if (form.checkValidity()) {
+            var newOrder = new order(
+            form.name.value,
+            form.phoneNumber.value,
+            form.email.value,
+            form.street.value,
+            form.houseNumber.value,
+            form.flatNumber.value,
+            $scope.cart.items);
+        
+            DataService.sendOrder(newOrder).then(function (response) {
+                alert(response);
+            });
+        }
+        
+        
+    };
+
 }]);
 
 function filterByCategory(products, categoryID) {
@@ -63,3 +84,19 @@ function chunk(arr, size) {
     return newArr;
 };
 
+function order(name, phoneNumber, email, street, house, flat, items) {
+    this.Name = name;
+    this.PhoneNumber = phoneNumber;
+    this.Email = email;
+    this.Street = street;
+    this.House = house;
+    this.Flat = flat;
+
+    this.Items = items;
+};
+
+function scrollToOrderForm() {
+    $('html, body').animate({
+        scrollTop: ($('#orderFormWell').first().offset().top)
+    }, 500);
+};

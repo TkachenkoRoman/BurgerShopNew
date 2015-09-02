@@ -69,3 +69,17 @@ a:disabled {
     pointer-events: none;
     text-decoration: none;
 }
+
+.table tbody>tr>td.vert-align
+{
+    vertical-align: middle;
+}
+
+h3 {
+    margin-bottom: 20px;
+}
+
+.total-price-label {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}

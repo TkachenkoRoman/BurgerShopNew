@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Diagnostics;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Web;
 using Shop.Data.Models;
 using Shop.Data;
@@ -94,6 +97,70 @@ namespace Shop.WebApi.Models
             }
             catch (Exception)
             {
+                return null;
+            }
+        }
+
+        public List<object> Parse(OrderFormModel model)
+        {
+            try
+            {
+                List<object> result = new List<object>();
+                List<OrderDetails> detailsList = new List<OrderDetails>();
+                List<Customers> allCustomers = (List<Customers>)_repo.GetAllCustomers().ToList();
+
+                var customer = new Customers
+                {
+                    Name = model.Name,
+                    Email = model.Email,
+                    PhoneNumber = model.PhoneNumber
+                };
+
+                Customers existingCustomer = allCustomers.FirstOrDefault(c => c.PhoneNumber == model.PhoneNumber);
+
+                int customerId = -1;
+                if (existingCustomer != null)
+                {
+                    _repo.Update(existingCustomer, customer);
+                    customerId = existingCustomer.Id;
+                }
+                else
+                    customerId = _repo.Insert(customer);
+                if (customerId < 0)
+                    return null;
+                result.Add(customer);
+
+                var order = new Orders
+                {
+                    CustomerID = customerId,
+                    Status = "new",
+                    ShipAddress = String.Join(" ", new string[] {model.Street, model.Flat, model.House})
+                };
+
+                int orderId = _repo.Insert(order);
+                if (orderId < 0)
+                    return null;
+                result.Add(order);
+
+                foreach (cartItem item in model.Items)
+                {
+                    var details = new OrderDetails
+                    {
+                        OrderID = orderId,
+                        ProductID = item.id,
+                        Quantity = item.quantity
+                    };
+                    if (!_repo.Insert(details))
+                        return null;
+                    detailsList.Add(details);
+                }
+                result.Add(detailsList);
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                Debug.Print("****************" + ex);
                 return null;
             }
         }

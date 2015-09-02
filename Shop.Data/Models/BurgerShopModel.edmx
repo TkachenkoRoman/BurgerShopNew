@@ -22,13 +22,10 @@
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
           <Property Name="Email" Type="nvarchar" MaxLength="50" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'BurgerShopDB.dbo.OrderDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="OrderDetails">
           <Key>
             <PropertyRef Name="OrderID" />
             <PropertyRef Name="ProductID" />
-            <PropertyRef Name="Quantity" />
           </Key>
           <Property Name="OrderID" Type="int" Nullable="false" />
           <Property Name="ProductID" Type="int" Nullable="false" />
@@ -40,7 +37,7 @@ warning 6002: The table/view 'BurgerShopDB.dbo.OrderDetails' does not have a pri
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CustomerID" Type="int" Nullable="false" />
-          <Property Name="OrderDate" Type="datetime" Nullable="false" />
+          <Property Name="OrderDate" Type="datetime" StoreGeneratedPattern="Computed" />
           <Property Name="ShipAddress" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="ShippedDate" Type="datetime" />
           <Property Name="DeliveryMan" Type="varchar" MaxLength="50" />
@@ -118,15 +115,9 @@ warning 6002: The table/view 'BurgerShopDB.dbo.OrderDetails' does not have a pri
         <EntityContainer Name="BurgerShopDBModelStoreContainer">
           <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderDetails" EntityType="Self.OrderDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="OrderDetails" EntityType="Self.OrderDetails" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [OrderDetails].[OrderID] AS [OrderID], 
-    [OrderDetails].[ProductID] AS [ProductID], 
-    [OrderDetails].[Quantity] AS [Quantity]
-    FROM [dbo].[OrderDetails] AS [OrderDetails]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK_OrderDetails_Orders" Association="Self.FK_OrderDetails_Orders">
             <End Role="Orders" EntitySet="Orders" />
             <End Role="OrderDetails" EntitySet="OrderDetails" />
@@ -173,7 +164,7 @@ warning 6002: The table/view 'BurgerShopDB.dbo.OrderDetails' does not have a pri
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CustomerID" Type="Int32" Nullable="false" />
-          <Property Name="OrderDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="OrderDate" Type="DateTime" Precision="3" annotation:StoreGeneratedPattern="Computed" />
           <Property Name="ShipAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="ShippedDate" Type="DateTime" Precision="3" />
           <Property Name="DeliveryMan" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -192,15 +183,14 @@ warning 6002: The table/view 'BurgerShopDB.dbo.OrderDetails' does not have a pri
           <Property Name="Description" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
           <Property Name="PicturePath" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="CategoryID" Type="Byte" Nullable="false" />
+          <Property Name="PictureDetailPath" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Categories" Relationship="Self.FK_Products_Products" FromRole="Products" ToRole="Categories" />
           <NavigationProperty Name="OrderDetails" Relationship="Self.FK_OrderDetails_Products" FromRole="Products" ToRole="OrderDetails" />
-          <Property Name="PictureDetailPath" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="OrderDetails">
           <Key>
             <PropertyRef Name="OrderID" />
             <PropertyRef Name="ProductID" />
-            <PropertyRef Name="Quantity" />
           </Key>
           <Property Name="OrderID" Type="Int32" Nullable="false" />
           <Property Name="ProductID" Type="Int32" Nullable="false" />
@@ -264,7 +254,7 @@ warning 6002: The table/view 'BurgerShopDB.dbo.OrderDetails' does not have a pri
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="BurgerShopContext" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="BurgerShopDBEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Categories" EntityType="Self.Categories" />
           <EntitySet Name="Customers" EntityType="Self.Customers" />
           <EntitySet Name="Orders" EntityType="Self.Orders" />
@@ -292,7 +282,7 @@ warning 6002: The table/view 'BurgerShopDB.dbo.OrderDetails' does not have a pri
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="BurgerShopDBModelStoreContainer" CdmEntityContainer="BurgerShopContext">
+        <EntityContainerMapping StorageEntityContainer="BurgerShopDBModelStoreContainer" CdmEntityContainer="BurgerShopDBEntities">
           <EntitySetMapping Name="Categories">
             <EntityTypeMapping TypeName="BurgerShopDBModel.Categories">
               <MappingFragment StoreEntitySet="Categories">
@@ -329,13 +319,13 @@ warning 6002: The table/view 'BurgerShopDB.dbo.OrderDetails' does not have a pri
           <EntitySetMapping Name="Products">
             <EntityTypeMapping TypeName="BurgerShopDBModel.Products">
               <MappingFragment StoreEntitySet="Products">
-                <ScalarProperty Name="PictureDetailPath" ColumnName="PictureDetailPath" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="PicturePath" ColumnName="PicturePath" />
                 <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="PictureDetailPath" ColumnName="PictureDetailPath" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

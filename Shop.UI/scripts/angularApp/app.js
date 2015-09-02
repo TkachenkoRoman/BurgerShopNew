@@ -39,6 +39,13 @@ angular.module('burgerShop').factory("DataService", ['$http', function ($http) {
                 return data;
             });
             return promise;
+        },
+        sendOrder: function ($params) {
+            var promise = $http.post('http://localhost:8080/api/orders', $params).success(function (response) {
+                //console.log('success');
+                return response;
+            });
+            return promise;
         }
     };
 }]);

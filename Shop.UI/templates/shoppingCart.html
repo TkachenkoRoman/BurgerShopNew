@@ -1,70 +1,92 @@
-﻿<div class="container-fluid">
-    <div class="row-fluid">
-        <div class="col-lg-8 col-md-8 col-sm-8">
-
-            <!-- items -->
-            <table class="table table-bordered">
-
-                <!-- header -->
-                <tr class="well">
-                    <td><b>Item</b></td>
-                    <td class="tdCenter"><b>Quantity</b></td>
-                    <td class="tdRight"><b>Price</b></td>
-                    <td />
-                </tr>
-
-                <!-- empty cart message -->
-                <tr ng-hide="cart.getTotalCount() > 0">
-                    <td class="tdCenter" colspan="4">
-                        Your cart is empty.
-                    </td>
-                </tr>
-
-                <!-- cart items -->
-                <tr ng-repeat="item in cart.items | orderBy:'name'">
-                    <td class="col-md-6">
-                        {{item.name}}
-                    </td>
-                    <td class="col-md-5">
-                        {{item.name}}
-                    </td>
-                    <td class="tdCenter col-md-3">
-                        <div class="input-group">
-                            <input type="text" class="form-control" ng-model="item.quantity" ng-change="cart.saveItems()">
-                            <span class="input-group-btn">
-                                <button class="btn btn-success" type="button" 
-                                        ng-disabled="item.quantity >= 1000"
-                                        ng-click="cart.addItem(item.id, item.name, item.price, +1)">
-                                    +
-                                </button>
-                                <button class="btn btn-inverse" type="button"
-                                        ng-disabled="item.quantity <= 1"
-                                        ng-click="cart.addItem(item.id, item.name, item.price, -1)">
-                                    -
-                                </button>
-                            </span>
-                        </div><!-- /input-group -->
-                    </td>
-                    <td class="tdRight col-md-2">{{item.price * item.quantity | currency}}</td>
-                    <td class="tdCenter col-md-1" title="remove from cart">
-                        <a href="" ng-click="cart.addItem(item.id, item.name, item.price, -10000000)">
-                            <i class="glyphicon glyphicon-remove" />
-                        </a>
-                    </td>
-                </tr>
-
-                <!-- footer -->
-                <tr class="well">
-                    <td><b>Total</b></td>
-                    <td class="tdCenter"><b>{{cart.getTotalCount()}}</b></td>
-                    <td class="tdRight"><b>{{cart.getTotalPrice() | currency}}</b></td>
-                    <td />
-                </tr>
-            </table>
+﻿<div class="modal-bg">
+    <div id="modal" class="panel panel-default detail-panel">
+        <div class="panel-heading detail-header">{{ productDetail.Name }}<a class="glyphicon glyphicon-remove" id="close"></a></div>
+        <div class="panel-body">
+            <div class="col-sm-6 col-md-6">
+                <img class="img-responsive" ng-src="{{ productDetail.PictureDetailPath || 'http://placehold.it/500x540'}}">
+            </div>
+            <div class="col-sm-6 col-md-6">
+                <div class="row detail" ng-if="productDetail.Description">
+                    <p>{{ productDetail.Description }}</p>
+                </div>
+                <div class="row detail-price detail">
+                    <p>Price: {{productDetail.Price | currency}}</p>
+                </div>
+            </div>
+            <button type="button" class="btn btn-lg btn-default detail-add-btn"
+                    ng-click="cart.addItem(productDetail.Id, productDetail.Name, productDetail.Price, 1)">
+                Add to cart
+            </button>
         </div>
+    </div>
+</div>
 
-        <!-- buttons -->
-        <div class="col-lg-4 col-md-4 col-sm-4">
+<div class="container-fluid">
+    <div class="row panel panel-default">
+        <div class="panel-body">
+            <div class="col-lg-8 col-md-8 col-sm-8">
+
+                <!-- items -->
+                <table class="table table-bordered">
+
+                    <!-- header -->
+                    <tr class="well">
+                        <td><b>Item</b></td>
+                        <td class="tdCenter"><b>Quantity</b></td>
+                        <td class="tdRight"><b>Price</b></td>
+                        <td />
+                    </tr>
+
+                    <!-- empty cart message -->
+                    <tr ng-hide="cart.getTotalCount() > 0">
+                        <td class="tdCenter" colspan="4">
+                            Your cart is empty.
+                        </td>
+                    </tr>
+
+                    <!-- cart items -->
+                    <tr ng-repeat="item in cart.items | orderBy:'name'">
+                        <td class="col-md-6 vert-align">
+                            <a href="" ng-click="showProductDetails(item.id)">{{item.name}}</a>
+                        </td>
+                        <td class="tdCenter col-md-3 vert-align">
+                            <div class="input-group">
+                                <input type="number" class="form-control" ng-model="item.quantity"
+                                       min="0" max="1000" ng-change="cart.saveItems()" /><!-- pattern="0-9> BUG WAS HERE   --> 
+                                <span class="input-group-btn">
+                                    <button class="btn btn-success" type="button"
+                                            ng-disabled="item.quantity >= 1000"
+                                            ng-click="cart.addItem(item.id, item.name, item.price, +1)">
+                                        +
+                                    </button>
+                                    <button class="btn btn-inverse" type="button"
+                                            ng-disabled="item.quantity <= 1"
+                                            ng-click="cart.addItem(item.id, item.name, item.price, -1)">
+                                        -
+                                    </button>
+                                </span>
+                            </div><!-- /input-group -->
+                        </td>
+                        <td class="tdRight col-md-2 vert-align">{{item.price * item.quantity | currency}}</td>
+                        <td class="tdCenter col-md-1 vert-align text-center" title="remove from cart">
+                            <a href="" ng-click="cart.addItem(item.id, item.name, item.price, -10000000)">
+                                <i class="glyphicon glyphicon-remove" />
+                            </a>
+                        </td>
+                    </tr>
+
+                    <!-- footer -->
+                    <tr class="well">
+                        <td><b>Total</b></td>
+                        <td class="tdCenter"><b>{{cart.getTotalCount()}}</b></td>
+                        <td class="tdRight"><b>{{cart.getTotalPrice() | currency}}</b></td>
+                        <td />
+                    </tr>
+                </table>
+            </div>
+
+            <!-- buttons -->
+            <div class="col-lg-4 col-md-4 col-sm-4">
                 <button class="btn btn-block btn-default"
                         onclick="window.location.href='index.html'">
                     <i class="glyphicon glyphicon-chevron-left" /> back to store
@@ -74,16 +96,72 @@
                         ng-disabled="cart.getTotalCount() < 1">
                     <i class="glyphicon glyphicon-trash" /> clear cart
                 </button>
-
-
-            <br /><br />
-
-            <p class="text-info">
-                <button class="btn btn-block btn-primary"
-                        ng-disabled="cart.getTotalCount() < 1">
-                    <i class="glyphicon glyphicon-ok" /> check out 
-                </button>
-            </p>
+            </div>
+        </div>
+        
+    </div> <!-- row-fluid -->
+    <div class="row">
+        <div class="well">
+            <h3>Order form</h3>
+            <form class="form-horizontal" role="form" name="orderForm">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="name">Name:</label>
+                            <div class="col-sm-10">
+                                <input ng-disabled="cart.getTotalCount() < 1" class="form-control" id="name" placeholder="Enter name"
+                                       required maxlength="50" pattern="^[A-Za-z\s]+[A-Za-z\s\-]*[A-Za-z\s]+$">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="email">Email:</label>
+                            <div class="col-sm-10">
+                                <input ng-disabled="cart.getTotalCount() < 1" type="email" class="form-control" id="email" 
+                                       placeholder="Enter email" title="Please enter correct email">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="street">Street:</label>
+                            <div class="col-sm-10">
+                                <input ng-disabled="cart.getTotalCount() < 1" class="form-control" id="street" placeholder="Enter street" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="phoneNumber">Phone number:</label>
+                            <div class="col-sm-10">
+                                <input ng-disabled="cart.getTotalCount() < 1" type="tel" class="form-control" id="phoneNumber" placeholder="Enter phone number"
+                                       required pattern="^\d{3}-\d{3}-\d{4}$" title="format: xxx-xxx-xxxx">
+                            </div>
+                        </div>
+                        <input class="form-control" placeholder="hiiden input for extra space" style="visibility: hidden">
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="houseNumber">House number:</label>
+                            <div class="col-sm-4">
+                                <input ng-disabled="cart.getTotalCount() < 1" class="form-control"
+                                        id="houseNumber" placeholder="Enter house number" required maxlength="6">
+                            </div>
+                            <label class="control-label col-sm-2" for="flatNumber">Flat number:</label>
+                            <div class="col-sm-4">
+                                <input ng-disabled="cart.getTotalCount() < 1" type="number" class="form-control" 
+                                       id="flatNumber" placeholder="Enter Flat number" min="1" max="1000">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="">
+                        <div class="col-md-2">
+                            <h3 class="total-price-label"><span class="label label-info">Total {{cart.getTotalPrice() | currency}}</span></h3>
+                        </div>
+                        <div class="col-md-8"></div>
+                        <div class="col-md-2">
+                            <button ng-disabled="cart.getTotalCount() < 1" type="submit" class="btn btn-block btn-success" ng-click="orderFormSubmit()">Submit order</button>
+                        </div>
+                    </div>
+                </div>          
+            </form>
         </div>
     </div>
 </div>

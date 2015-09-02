@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="BurgerShopDBModelStoreContainer" CdmEntityContainer="BurgerShopContext">
+  <EntityContainerMapping StorageEntityContainer="BurgerShopDBModelStoreContainer" CdmEntityContainer="BurgerShopDBEntities">
     <EntitySetMapping Name="Categories">
       <EntityTypeMapping TypeName="BurgerShopDBModel.Categories">
         <MappingFragment StoreEntitySet="Categories">
@@ -37,13 +37,13 @@
     <EntitySetMapping Name="Products">
       <EntityTypeMapping TypeName="BurgerShopDBModel.Products">
         <MappingFragment StoreEntitySet="Products">
-          <ScalarProperty Name="PictureDetailPath" ColumnName="PictureDetailPath" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Price" ColumnName="Price" />
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="PicturePath" ColumnName="PicturePath" />
           <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+          <ScalarProperty Name="PictureDetailPath" ColumnName="PictureDetailPath" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

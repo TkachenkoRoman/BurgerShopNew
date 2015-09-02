@@ -15,7 +15,7 @@ namespace Shop.Data
         bool Update(Products originalProduct, Products updatedProduct);
         bool DeleteProduct(int productID);
 
-        bool Insert(Orders order);
+        int Insert(Orders order); // returnes id
         IQueryable<Orders> GetAllOrders();
         Orders GetOrder(int orderID);
         bool Update(Orders originalOrder, Orders updatedOrder);
@@ -24,7 +24,7 @@ namespace Shop.Data
         bool Insert(OrderDetails orderDetails);
         IQueryable<OrderDetails> GetOrderDetailsByOrderID(int orderID);
 
-        bool Insert(Customers customer);
+        int Insert(Customers customer); // returnes id
         IQueryable<Customers> GetAllCustomers();
         Customers GetCustomer(int customerID);
         bool Update(Customers originalCustomer, Customers updatedCustomer);

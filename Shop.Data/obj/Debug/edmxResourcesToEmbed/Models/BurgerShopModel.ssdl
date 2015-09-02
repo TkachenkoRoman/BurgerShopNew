@@ -17,13 +17,10 @@
     <Property Name="Name" Type="nvarchar" MaxLength="50" />
     <Property Name="Email" Type="nvarchar" MaxLength="50" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'BurgerShopDB.dbo.OrderDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="OrderDetails">
     <Key>
       <PropertyRef Name="OrderID" />
       <PropertyRef Name="ProductID" />
-      <PropertyRef Name="Quantity" />
     </Key>
     <Property Name="OrderID" Type="int" Nullable="false" />
     <Property Name="ProductID" Type="int" Nullable="false" />
@@ -35,7 +32,7 @@ warning 6002: The table/view 'BurgerShopDB.dbo.OrderDetails' does not have a pri
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="CustomerID" Type="int" Nullable="false" />
-    <Property Name="OrderDate" Type="datetime" Nullable="false" />
+    <Property Name="OrderDate" Type="datetime" StoreGeneratedPattern="Computed" />
     <Property Name="ShipAddress" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="ShippedDate" Type="datetime" />
     <Property Name="DeliveryMan" Type="varchar" MaxLength="50" />
@@ -113,15 +110,9 @@ warning 6002: The table/view 'BurgerShopDB.dbo.OrderDetails' does not have a pri
   <EntityContainer Name="BurgerShopDBModelStoreContainer">
     <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OrderDetails" EntityType="Self.OrderDetails" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="OrderDetails" EntityType="Self.OrderDetails" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [OrderDetails].[OrderID] AS [OrderID], 
-    [OrderDetails].[ProductID] AS [ProductID], 
-    [OrderDetails].[Quantity] AS [Quantity]
-    FROM [dbo].[OrderDetails] AS [OrderDetails]</DefiningQuery>
-    </EntitySet>
     <AssociationSet Name="FK_OrderDetails_Orders" Association="Self.FK_OrderDetails_Orders">
       <End Role="Orders" EntitySet="Orders" />
       <End Role="OrderDetails" EntitySet="OrderDetails" />

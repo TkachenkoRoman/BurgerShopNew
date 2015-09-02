@@ -25,7 +25,7 @@
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="CustomerID" Type="Int32" Nullable="false" />
-    <Property Name="OrderDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="OrderDate" Type="DateTime" Precision="3" annotation:StoreGeneratedPattern="Computed" />
     <Property Name="ShipAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="ShippedDate" Type="DateTime" Precision="3" />
     <Property Name="DeliveryMan" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -44,15 +44,14 @@
     <Property Name="Description" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
     <Property Name="PicturePath" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
     <Property Name="CategoryID" Type="Byte" Nullable="false" />
+    <Property Name="PictureDetailPath" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="Categories" Relationship="Self.FK_Products_Products" FromRole="Products" ToRole="Categories" />
     <NavigationProperty Name="OrderDetails" Relationship="Self.FK_OrderDetails_Products" FromRole="Products" ToRole="OrderDetails" />
-    <Property Name="PictureDetailPath" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="OrderDetails">
     <Key>
       <PropertyRef Name="OrderID" />
       <PropertyRef Name="ProductID" />
-      <PropertyRef Name="Quantity" />
     </Key>
     <Property Name="OrderID" Type="Int32" Nullable="false" />
     <Property Name="ProductID" Type="Int32" Nullable="false" />
@@ -116,7 +115,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="BurgerShopContext" annotation:LazyLoadingEnabled="true">
+  <EntityContainer Name="BurgerShopDBEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Categories" EntityType="Self.Categories" />
     <EntitySet Name="Customers" EntityType="Self.Customers" />
     <EntitySet Name="Orders" EntityType="Self.Orders" />

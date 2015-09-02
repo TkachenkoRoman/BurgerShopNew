@@ -9,7 +9,7 @@ namespace Shop.WebApi.Models
     {
         public int Id { get; set; }
         public int CustomerID { get; set; }
-        public DateTime OrderDate { get; set; }
+        public Nullable<System.DateTime> OrderDate { get; set; }
         public string ShipAddress { get; set; }
         public Nullable<System.DateTime> ShippedDate { get; set; }
         public string DeliveryMan { get; set; }

@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Shop.Data.Models;
+using System.Data.Entity.Validation;
 
 namespace Shop.Data
 {
@@ -70,16 +72,31 @@ namespace Shop.Data
             return false;
         }
 
-        public bool Insert(Orders order)
+        public int Insert(Orders order)
         {
             try
             {
                 _ctx.Orders.Add(order);
-                return true;
-            }
-            catch
+                SaveAll();
+                return order.Id;
+            }        
+            catch (DbEntityValidationException dbEx)
             {
-                return false;
+                foreach (var validationErrors in dbEx.EntityValidationErrors)
+                {
+                    foreach (var validationError in validationErrors.ValidationErrors)
+                    {
+                        Debug.Print("Property: {0} Error: {1}",
+                                                validationError.PropertyName,
+                                                validationError.ErrorMessage);
+                    }
+                }
+                return -1;
+            }
+            catch (Exception ex)
+            {
+                Debug.Print("******* Order insert ********" + ex);
+                return -1;
             }
         }
 
@@ -123,10 +140,12 @@ namespace Shop.Data
             try
             {
                 _ctx.OrderDetails.Add(orderDetails);
+                SaveAll();
                 return true;
             }
-            catch
+            catch (Exception ex)
             {
+                Debug.Print("****** OrderDetails Insert *****" + ex);
                 return false;
             }
         }
@@ -136,16 +155,17 @@ namespace Shop.Data
             return _ctx.OrderDetails.Where(x => x.OrderID == orderID).AsQueryable();
         }
 
-        public bool Insert(Customers customer)
+        public int Insert(Customers customer)
         {
             try
             {
                 _ctx.Customers.Add(customer);
-                return true;
+                SaveAll();
+                return customer.Id;
             }
             catch
             {
-                return false;
+                return -1;
             }
         }
 
@@ -160,8 +180,16 @@ namespace Shop.Data
         }
 
         public bool Update(Customers originalCustomer, Customers updatedCustomer)
-        {
-            _ctx.Entry(originalCustomer).CurrentValues.SetValues(updatedCustomer);
+        {           
+            try
+            {
+                _ctx.Entry(originalCustomer).CurrentValues.SetValues(updatedCustomer);
+                SaveAll();
+            }
+            catch
+            {
+                return false;
+            }
             return true;
         }
 
